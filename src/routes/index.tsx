@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import type React from "react";
 
 import logoUrl from "@/assets/promptx-logo.jpeg";
-import pxUrl from "@/assets/promptx-px.jpeg";
+import pxUrl from "@/assets/promptx-px.png";
 import overviewUrl from "@/assets/promptx-event-overview.jpeg";
 
 export const Route = createFileRoute("/")({
