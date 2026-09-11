@@ -1,14 +1,18 @@
-# Welcome to your Lovable project
+# Vibrant Showcase
+
+https://quiet-blade-kyzc2.sites.repaint.com   this the live url of website application i need same as extract the same with same design,animation,colors,font all sections exactly
 
 This project was built with [Lovable](https://lovable.dev).
 
+**Live app**: https://promptx-ai-challenge.lovable.app
+
 ## Build with Lovable
 
-Open your project in the [Lovable editor](https://lovable.dev) and keep building.
+Continue developing this project in the [Lovable editor](https://lovable.dev/projects/6efa0759-831b-4def-86e8-9d98d8fb7844).
 
 - **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: connect the project to GitHub and every change made in Lovable is committed straight to your repository.
-- **Full ownership**: this code is yours. Push to your repository and your changes sync back into Lovable, ready for your next prompt.
+- **Stay in sync**: every change made in Lovable is committed straight to this repository.
+- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
 
 ## Development
 
@@ -20,10 +24,3 @@ cd <repository-name>
 npm i
 npm run dev
 ```
-
-## Built with
-
-- TanStack Start
-- TypeScript
-- React
-- Tailwind CSS
