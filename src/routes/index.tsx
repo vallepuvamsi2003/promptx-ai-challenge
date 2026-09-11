@@ -2,9 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect } from "react";
 import type React from "react";
 
-import logoAsset from "@/assets/promptx-logo.jpeg.asset.json";
-import pxAsset from "@/assets/promptx-px.png.asset.json";
-import overviewAsset from "@/assets/promptx-event-overview.jpeg.asset.json";
+import logoUrl from "@/assets/promptx-logo.jpeg";
+import pxUrl from "@/assets/promptx-px.jpeg";
+import overviewUrl from "@/assets/promptx-event-overview.jpeg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -63,7 +63,7 @@ function Index() {
             height="1280"
             decoding="async"
             style={{ color: "transparent" }}
-            src={logoAsset.url}
+            src={logoUrl}
           />
         </div>
         <div className="cinematic-intro__line"></div>
@@ -82,7 +82,7 @@ function Index() {
                   decoding="async"
                   className="brand-image"
                   style={{ color: "transparent" }}
-                  src={logoAsset.url}
+                  src={logoUrl}
                 />
               </span>
               <span className="brand-word">PROMPTX</span>
@@ -278,7 +278,7 @@ function Index() {
                     height="580"
                     decoding="async"
                     style={{ color: "transparent" }}
-                    src={pxAsset.url}
+                    src={pxUrl}
                   />
                 </div>
                 <span className="logo-stage__sweep" aria-hidden="true"></span>
@@ -1474,7 +1474,7 @@ function Index() {
                     height="1024"
                     decoding="async"
                     style={{ color: "transparent" }}
-                    src={overviewAsset.url}
+                    src={overviewUrl}
                   />
                 </div>
                 <figcaption className="gallery-feature__caption">
@@ -1658,7 +1658,7 @@ function Index() {
                       decoding="async"
                       className="brand-image"
                       style={{ color: "transparent" }}
-                      src={logoAsset.url}
+                      src={logoUrl}
                     />
                   </span>
                   <span className="brand-word">PROMPTX</span>
