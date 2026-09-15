@@ -1,6 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type React from "react";
+
+const NAV_ITEMS = [
+  { id: "challenge", label: "ABOUT" },
+  { id: "rounds", label: "ROUNDS" },
+  { id: "process", label: "PROCESS" },
+  { id: "rules", label: "RULES" },
+  { id: "prizes", label: "PRIZES" },
+  { id: "gallery", label: "GALLERY" },
+  { id: "faq", label: "FAQ" },
+];
 
 import logoUrl from "@/assets/promptx-logo.jpeg";
 import pxUrl from "@/assets/promptx-px.png";
