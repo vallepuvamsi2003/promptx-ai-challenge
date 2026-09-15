@@ -15,6 +15,13 @@ const NAV_ITEMS = [
 import logoUrl from "@/assets/promptx-logo.jpeg";
 import pxUrl from "@/assets/promptx-px.png";
 import overviewUrl from "@/assets/promptx-event-overview.jpeg";
+import galleryPosterUrl from "@/assets/promptx-gallery-poster.png";
+
+const GALLERY_IMAGES = [
+  { src: galleryPosterUrl, alt: "PROMPTX event poster showing the three challenge rounds" },
+];
+
+const DEFAULT_VIDEO = "/media/promptx-event-video.mp4";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -63,6 +70,31 @@ function Index() {
   const [stuck, setStuck] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState<string | null>(null);
+  const [orbitAngle, setOrbitAngle] = useState(0);
+  const [orbitPaused, setOrbitPaused] = useState(false);
+  const [videoSrc, setVideoSrc] = useState(DEFAULT_VIDEO);
+
+  useEffect(() => {
+    if (orbitPaused) return;
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    let last = performance.now();
+    const tick = (now: number) => {
+      const delta = now - last;
+      last = now;
+      setOrbitAngle((prev) => (prev + delta * 0.012) % 360);
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [orbitPaused]);
+
+  const handleVideoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    setVideoSrc(URL.createObjectURL(file));
+  };
 
   useEffect(() => {
     const onScroll = () => setStuck(window.scrollY > 120);
