@@ -15,6 +15,13 @@ const NAV_ITEMS = [
 import logoUrl from "@/assets/promptx-logo.jpeg";
 import pxUrl from "@/assets/promptx-px.png";
 import overviewUrl from "@/assets/promptx-event-overview.jpeg";
+import galleryPosterUrl from "@/assets/promptx-gallery-poster.png";
+
+const GALLERY_IMAGES = [
+  { src: galleryPosterUrl, alt: "PROMPTX event poster showing the three challenge rounds" },
+];
+
+const DEFAULT_VIDEO = "/media/promptx-event-video.mp4";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -63,6 +70,31 @@ function Index() {
   const [stuck, setStuck] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState<string | null>(null);
+  const [orbitAngle, setOrbitAngle] = useState(0);
+  const [orbitPaused, setOrbitPaused] = useState(false);
+  const [videoSrc, setVideoSrc] = useState(DEFAULT_VIDEO);
+
+  useEffect(() => {
+    if (orbitPaused) return;
+    if (typeof window === "undefined") return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    let raf = 0;
+    let last = performance.now();
+    const tick = (now: number) => {
+      const delta = now - last;
+      last = now;
+      setOrbitAngle((prev) => (prev + delta * 0.012) % 360);
+      raf = requestAnimationFrame(tick);
+    };
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [orbitPaused]);
+
+  const handleVideoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    setVideoSrc(URL.createObjectURL(file));
+  };
 
   useEffect(() => {
     const onScroll = () => setStuck(window.scrollY > 120);
@@ -1559,24 +1591,66 @@ function Index() {
               className="scroll-reveal gallery-reveal"
               style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
             >
-              <figure className="gallery-feature">
-                <div className="gallery-feature__media">
-                  <img
-                    alt="PROMPTX event poster showing the three challenge rounds"
-                    loading="lazy"
-                    width="1536"
-                    height="1024"
-                    decoding="async"
-                    style={{ color: "transparent" }}
-                    src={overviewUrl}
-                  />
+              <div
+                className="gallery-orbit"
+                onMouseEnter={() => setOrbitPaused(true)}
+                onMouseLeave={() => setOrbitPaused(false)}
+              >
+                <div className="gallery-orbit__stage">
+                  {GALLERY_IMAGES.map((image, index) => {
+                    const step = 360 / GALLERY_IMAGES.length;
+                    const theta = ((orbitAngle + index * step) * Math.PI) / 180;
+                    const x = Math.sin(theta);
+                    const depth = Math.cos(theta);
+                    const scale = 0.62 + 0.38 * ((depth + 1) / 2);
+                    return (
+                      <figure
+                        key={image.src}
+                        className="gallery-orbit__item"
+                        style={{
+                          transform: `translate(-50%, -50%) translate3d(${x * 38}%, ${-depth * 5}%, 0) scale(${scale})`,
+                          opacity: 0.32 + 0.68 * ((depth + 1) / 2),
+                          zIndex: Math.round((depth + 1) * 50),
+                          filter: `blur(${(1 - (depth + 1) / 2) * 1.6}px)`,
+                        }}
+                      >
+                        <img
+                          alt={image.alt}
+                          loading="lazy"
+                          decoding="async"
+                          src={image.src}
+                        />
+                      </figure>
+                    );
+                  })}
                 </div>
                 <figcaption className="gallery-feature__caption">
                   <span>EVENT GALLERY</span>
                   <strong>Think. Prompt. Create. Build.</strong>
                   <p>One visual signal for the PROMPTX challenge.</p>
                 </figcaption>
-              </figure>
+              </div>
+            </div>
+            <div
+              className="scroll-reveal gallery-video"
+              style={{ "--reveal-delay": "200ms" } as React.CSSProperties}
+            >
+              <div className="gallery-video__head">
+                <p className="eyebrow eyebrow--cyan">
+                  <span className="eyebrow__line"></span>PROMPTX VIDEO
+                </p>
+                <label className="button button--ghost gallery-video__upload">
+                  UPLOAD VIDEO
+                  <input
+                    type="file"
+                    accept="video/mp4,video/webm,video/quicktime,video/*"
+                    onChange={handleVideoUpload}
+                  />
+                </label>
+              </div>
+              <div className="gallery-video__frame">
+                <video key={videoSrc} src={videoSrc} controls playsInline preload="metadata" />
+              </div>
             </div>
           </div>
         </section>
