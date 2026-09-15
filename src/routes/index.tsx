@@ -1559,24 +1559,66 @@ function Index() {
               className="scroll-reveal gallery-reveal"
               style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
             >
-              <figure className="gallery-feature">
-                <div className="gallery-feature__media">
-                  <img
-                    alt="PROMPTX event poster showing the three challenge rounds"
-                    loading="lazy"
-                    width="1536"
-                    height="1024"
-                    decoding="async"
-                    style={{ color: "transparent" }}
-                    src={overviewUrl}
-                  />
+              <div
+                className="gallery-orbit"
+                onMouseEnter={() => setOrbitPaused(true)}
+                onMouseLeave={() => setOrbitPaused(false)}
+              >
+                <div className="gallery-orbit__stage">
+                  {GALLERY_IMAGES.map((image, index) => {
+                    const step = 360 / GALLERY_IMAGES.length;
+                    const theta = ((orbitAngle + index * step) * Math.PI) / 180;
+                    const x = Math.sin(theta);
+                    const depth = Math.cos(theta);
+                    const scale = 0.62 + 0.38 * ((depth + 1) / 2);
+                    return (
+                      <figure
+                        key={image.src}
+                        className="gallery-orbit__item"
+                        style={{
+                          transform: `translate(-50%, -50%) translate3d(${x * 38}%, ${-depth * 5}%, 0) scale(${scale})`,
+                          opacity: 0.32 + 0.68 * ((depth + 1) / 2),
+                          zIndex: Math.round((depth + 1) * 50),
+                          filter: `blur(${(1 - (depth + 1) / 2) * 1.6}px)`,
+                        }}
+                      >
+                        <img
+                          alt={image.alt}
+                          loading="lazy"
+                          decoding="async"
+                          src={image.src}
+                        />
+                      </figure>
+                    );
+                  })}
                 </div>
                 <figcaption className="gallery-feature__caption">
                   <span>EVENT GALLERY</span>
                   <strong>Think. Prompt. Create. Build.</strong>
                   <p>One visual signal for the PROMPTX challenge.</p>
                 </figcaption>
-              </figure>
+              </div>
+            </div>
+            <div
+              className="scroll-reveal gallery-video"
+              style={{ "--reveal-delay": "200ms" } as React.CSSProperties}
+            >
+              <div className="gallery-video__head">
+                <p className="eyebrow eyebrow--cyan">
+                  <span className="eyebrow__line"></span>PROMPTX VIDEO
+                </p>
+                <label className="button button--ghost gallery-video__upload">
+                  UPLOAD VIDEO
+                  <input
+                    type="file"
+                    accept="video/mp4,video/webm,video/quicktime,video/*"
+                    onChange={handleVideoUpload}
+                  />
+                </label>
+              </div>
+              <div className="gallery-video__frame">
+                <video key={videoSrc} src={videoSrc} controls playsInline preload="metadata" />
+              </div>
             </div>
           </div>
         </section>
