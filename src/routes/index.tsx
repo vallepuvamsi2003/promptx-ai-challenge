@@ -125,97 +125,97 @@ function Index() {
         <div className="cinematic-intro__line"></div>
         <p className="cinematic-intro__label">CSM DEPARTMENT / PRESENTS</p>
       </div>
-      <main id="top" className="site-page">
-        <header
-          className={`site-header${stuck ? " is-stuck" : ""}${menuOpen ? " is-open" : ""}`}
-        >
-          <div className="site-header__inner">
-            <a className="brand-lockupbrand-lockup--compact" href="#top" aria-label="PROMPTX home">
-              <span className="brand-image-frame">
-                <img
-                  alt="PROMPTX logo"
-                  loading="lazy"
-                  width="72"
-                  height="72"
-                  decoding="async"
-                  className="brand-image"
-                  style={{ color: "transparent" }}
-                  src={logoUrl}
-                />
-              </span>
-              <span className="brand-word">PROMPTX</span>
-            </a>
-            <nav className="site-nav" aria-label="Main navigation">
-              {NAV_ITEMS.map((item) => (
-                <a
-                  key={item.id}
-                  href={`#${item.id}`}
-                  className={active === item.id ? "is-active" : undefined}
-                  aria-current={active === item.id ? "true" : undefined}
-                  onClick={(e) => handleNavClick(e, item.id)}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </nav>
-            <button
-              type="button"
-              className="nav-toggle"
-              aria-label={menuOpen ? "Close navigation" : "Open navigation"}
-              aria-expanded={menuOpen}
-              onClick={() => setMenuOpen((v) => !v)}
-            >
-              <span></span>
-              <span></span>
-              <span></span>
-            </button>
-            <a
-              className="button button--small button--primary"
-              href="https://forms.gle/78P3TuzNRuyPi7hh9"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              REGISTER NOW{" "}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="15"
-                height="15"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                className="lucide lucide-arrow-up-right"
-                aria-hidden="true"
-              >
-                <path d="M7 7h10v10"></path>
-                <path d="M7 17 17 7"></path>
-              </svg>
-            </a>
-          </div>
-          <nav className="mobile-nav" aria-label="Mobile navigation">
+      <header
+        className={`site-header${stuck ? " is-stuck" : ""}${menuOpen ? " is-open" : ""}`}
+      >
+        <div className="site-header__inner">
+          <a className="brand-lockupbrand-lockup--compact" href="#top" aria-label="PROMPTX home">
+            <span className="brand-image-frame">
+              <img
+                alt="PROMPTX logo"
+                loading="lazy"
+                width="72"
+                height="72"
+                decoding="async"
+                className="brand-image"
+                style={{ color: "transparent" }}
+                src={logoUrl}
+              />
+            </span>
+            <span className="brand-word">PROMPTX</span>
+          </a>
+          <nav className="site-nav" aria-label="Main navigation">
             {NAV_ITEMS.map((item) => (
               <a
                 key={item.id}
                 href={`#${item.id}`}
                 className={active === item.id ? "is-active" : undefined}
+                aria-current={active === item.id ? "true" : undefined}
                 onClick={(e) => handleNavClick(e, item.id)}
               >
                 {item.label}
               </a>
             ))}
-            <a
-              className="button button--small button--primary"
-              href="https://forms.gle/78P3TuzNRuyPi7hh9"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setMenuOpen(false)}
-            >
-              REGISTER NOW
-            </a>
           </nav>
-        </header>
+          <button
+            type="button"
+            className="nav-toggle"
+            aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen((v) => !v)}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+          <a
+            className="button button--small button--primary"
+            href="https://forms.gle/78P3TuzNRuyPi7hh9"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            REGISTER NOW{" "}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="15"
+              height="15"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-arrow-up-right"
+              aria-hidden="true"
+            >
+              <path d="M7 7h10v10"></path>
+              <path d="M7 17 17 7"></path>
+            </svg>
+          </a>
+        </div>
+        <nav className="mobile-nav" aria-label="Mobile navigation">
+          {NAV_ITEMS.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              className={active === item.id ? "is-active" : undefined}
+              onClick={(e) => handleNavClick(e, item.id)}
+            >
+              {item.label}
+            </a>
+          ))}
+          <a
+            className="button button--small button--primary"
+            href="https://forms.gle/78P3TuzNRuyPi7hh9"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setMenuOpen(false)}
+          >
+            REGISTER NOW
+          </a>
+        </nav>
+      </header>
+      <main id="top" className="site-page">
         <section className="hero-section" aria-labelledby="hero-title">
           <div className="hero-section__grid" aria-hidden="true"></div>
           <div className="hero-section__noise" aria-hidden="true"></div>
