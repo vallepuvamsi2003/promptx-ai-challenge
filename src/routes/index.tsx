@@ -126,7 +126,9 @@ function Index() {
         <p className="cinematic-intro__label">CSM DEPARTMENT / PRESENTS</p>
       </div>
       <main id="top" className="site-page">
-        <header className="site-header">
+        <header
+          className={`site-header${stuck ? " is-stuck" : ""}${menuOpen ? " is-open" : ""}`}
+        >
           <div className="site-header__inner">
             <a className="brand-lockupbrand-lockup--compact" href="#top" aria-label="PROMPTX home">
               <span className="brand-image-frame">
