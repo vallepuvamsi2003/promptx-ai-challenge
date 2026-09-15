@@ -1408,8 +1408,8 @@ function Index() {
                     <span className="event-rule__chevron" aria-hidden="true"></span>
                   </summary>
                   <p>
-                    Round 1 is without AI. AI image-generation tools are allowed in Round 2, and AI
-                    is allowed in Round 3 subject to the announced tool list.
+                    Round 1 is without LLM. LLM image-generation tools are allowed in Round 2, and
+                    LLM is allowed in Round 3 subject to the announced tool list.
                   </p>
                 </details>
               </div>
