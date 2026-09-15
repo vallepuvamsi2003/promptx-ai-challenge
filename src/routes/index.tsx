@@ -146,14 +146,29 @@ function Index() {
               <span className="brand-word">PROMPTX</span>
             </a>
             <nav className="site-nav" aria-label="Main navigation">
-              <a href="#challenge">ABOUT</a>
-              <a href="#rounds">ROUNDS</a>
-              <a href="#process">PROCESS</a>
-              <a href="#rules">RULES</a>
-              <a href="#prizes">PRIZES</a>
-              <a href="#gallery">GALLERY</a>
-              <a href="#faq">FAQ</a>
+              {NAV_ITEMS.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  className={active === item.id ? "is-active" : undefined}
+                  aria-current={active === item.id ? "true" : undefined}
+                  onClick={(e) => handleNavClick(e, item.id)}
+                >
+                  {item.label}
+                </a>
+              ))}
             </nav>
+            <button
+              type="button"
+              className="nav-toggle"
+              aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((v) => !v)}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
             <a
               className="button button--small button--primary"
               href="https://forms.gle/78P3TuzNRuyPi7hh9"
