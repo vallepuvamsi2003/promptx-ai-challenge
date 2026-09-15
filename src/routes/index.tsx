@@ -1404,7 +1404,7 @@ function Index() {
                 <details className="event-rule">
                   <summary>
                     <span className="event-rule__number">04</span>
-                    <span className="event-rule__title">AI USAGE</span>
+                    <span className="event-rule__title">LLM USAGE</span>
                     <span className="event-rule__chevron" aria-hidden="true"></span>
                   </summary>
                   <p>
