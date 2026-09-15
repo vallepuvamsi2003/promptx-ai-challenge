@@ -27,3 +27,6 @@
  .mobile-nav a.is-active{color:#49eaff}
  .mobile-nav a.button{align-self:flex-start;margin-right:auto;color:#050711}
 }
+
+.event-rule p,
+.faq-item p{color:#fff}
