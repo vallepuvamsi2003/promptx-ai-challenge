@@ -25,5 +25,5 @@
  .site-header.is-open .mobile-nav{max-height:80vh;opacity:1;pointer-events:auto;padding-top:1.4rem;padding-bottom:2rem}
  .mobile-nav a{font-family:var(--font-orbitron);letter-spacing:.13em;font-size:.72rem;font-weight:700;color:#cfe3ff}
  .mobile-nav a.is-active{color:#49eaff}
- .mobile-nav a.button{align-self:flex-start;color:#050711}
+ .mobile-nav a.button{align-self:flex-start;margin-right:auto;color:#050711}
 }
