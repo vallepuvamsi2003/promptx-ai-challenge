@@ -60,6 +60,52 @@ function Index() {
     return () => io.disconnect();
   }, []);
 
+  const [stuck, setStuck] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [active, setActive] = useState<string | null>(null);
+
+  useEffect(() => {
+    const onScroll = () => setStuck(window.scrollY > 120);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const sections = NAV_ITEMS.map((n) => document.getElementById(n.id)).filter(
+      (el): el is HTMLElement => Boolean(el),
+    );
+    if (!sections.length || !("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActive(visible.target.id);
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.2, 0.5, 1] },
+    );
+    sections.forEach((s) => io.observe(s));
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  const handleNavClick = (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    const target = document.getElementById(id);
+    if (!target) return;
+    event.preventDefault();
+    setMenuOpen(false);
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.history.replaceState(null, "", `#${id}`);
+  };
+
+
   return (
     <>
       <div className="cinematic-intro" aria-hidden="true">
