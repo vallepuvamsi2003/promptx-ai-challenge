@@ -1,6 +1,16 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import type React from "react";
+
+const NAV_ITEMS = [
+  { id: "challenge", label: "ABOUT" },
+  { id: "rounds", label: "ROUNDS" },
+  { id: "process", label: "PROCESS" },
+  { id: "rules", label: "RULES" },
+  { id: "prizes", label: "PRIZES" },
+  { id: "gallery", label: "GALLERY" },
+  { id: "faq", label: "FAQ" },
+];
 
 import logoUrl from "@/assets/promptx-logo.jpeg";
 import pxUrl from "@/assets/promptx-px.png";
@@ -50,6 +60,52 @@ function Index() {
     return () => io.disconnect();
   }, []);
 
+  const [stuck, setStuck] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [active, setActive] = useState<string | null>(null);
+
+  useEffect(() => {
+    const onScroll = () => setStuck(window.scrollY > 120);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const sections = NAV_ITEMS.map((n) => document.getElementById(n.id)).filter(
+      (el): el is HTMLElement => Boolean(el),
+    );
+    if (!sections.length || !("IntersectionObserver" in window)) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((e) => e.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActive(visible.target.id);
+      },
+      { rootMargin: "-45% 0px -45% 0px", threshold: [0, 0.2, 0.5, 1] },
+    );
+    sections.forEach((s) => io.observe(s));
+    return () => io.disconnect();
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = menuOpen ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [menuOpen]);
+
+  const handleNavClick = (event: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    const target = document.getElementById(id);
+    if (!target) return;
+    event.preventDefault();
+    setMenuOpen(false);
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.history.replaceState(null, "", `#${id}`);
+  };
+
+
   return (
     <>
       <div className="cinematic-intro" aria-hidden="true">
@@ -70,7 +126,9 @@ function Index() {
         <p className="cinematic-intro__label">CSM DEPARTMENT / PRESENTS</p>
       </div>
       <main id="top" className="site-page">
-        <header className="site-header">
+        <header
+          className={`site-header${stuck ? " is-stuck" : ""}${menuOpen ? " is-open" : ""}`}
+        >
           <div className="site-header__inner">
             <a className="brand-lockupbrand-lockup--compact" href="#top" aria-label="PROMPTX home">
               <span className="brand-image-frame">
@@ -88,14 +146,29 @@ function Index() {
               <span className="brand-word">PROMPTX</span>
             </a>
             <nav className="site-nav" aria-label="Main navigation">
-              <a href="#challenge">ABOUT</a>
-              <a href="#rounds">ROUNDS</a>
-              <a href="#process">PROCESS</a>
-              <a href="#rules">RULES</a>
-              <a href="#prizes">PRIZES</a>
-              <a href="#gallery">GALLERY</a>
-              <a href="#faq">FAQ</a>
+              {NAV_ITEMS.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  className={active === item.id ? "is-active" : undefined}
+                  aria-current={active === item.id ? "true" : undefined}
+                  onClick={(e) => handleNavClick(e, item.id)}
+                >
+                  {item.label}
+                </a>
+              ))}
             </nav>
+            <button
+              type="button"
+              className="nav-toggle"
+              aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((v) => !v)}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
             <a
               className="button button--small button--primary"
               href="https://forms.gle/78P3TuzNRuyPi7hh9"
@@ -121,6 +194,27 @@ function Index() {
               </svg>
             </a>
           </div>
+          <nav className="mobile-nav" aria-label="Mobile navigation">
+            {NAV_ITEMS.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className={active === item.id ? "is-active" : undefined}
+                onClick={(e) => handleNavClick(e, item.id)}
+              >
+                {item.label}
+              </a>
+            ))}
+            <a
+              className="button button--small button--primary"
+              href="https://forms.gle/78P3TuzNRuyPi7hh9"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMenuOpen(false)}
+            >
+              REGISTER NOW
+            </a>
+          </nav>
         </header>
         <section className="hero-section" aria-labelledby="hero-title">
           <div className="hero-section__grid" aria-hidden="true"></div>
