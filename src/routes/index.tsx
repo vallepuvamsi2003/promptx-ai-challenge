@@ -194,6 +194,27 @@ function Index() {
               </svg>
             </a>
           </div>
+          <nav className="mobile-nav" aria-label="Mobile navigation">
+            {NAV_ITEMS.map((item) => (
+              <a
+                key={item.id}
+                href={`#${item.id}`}
+                className={active === item.id ? "is-active" : undefined}
+                onClick={(e) => handleNavClick(e, item.id)}
+              >
+                {item.label}
+              </a>
+            ))}
+            <a
+              className="button button--small button--primary"
+              href="https://forms.gle/78P3TuzNRuyPi7hh9"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMenuOpen(false)}
+            >
+              REGISTER NOW
+            </a>
+          </nav>
         </header>
         <section className="hero-section" aria-labelledby="hero-title">
           <div className="hero-section__grid" aria-hidden="true"></div>
