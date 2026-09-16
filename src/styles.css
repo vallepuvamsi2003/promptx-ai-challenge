@@ -30,3 +30,27 @@
 
 .event-rule p,
 .faq-item p{color:#fff}
+
+/* ===== Gallery orbit + video ===== */
+.gallery-reveal{margin-top:3.5rem}
+.gallery-orbit{position:relative;display:flex;flex-direction:column;align-items:center;gap:2rem}
+.gallery-orbit__stage{position:relative;width:100%;height:clamp(320px,46vw,560px);perspective:1200px}
+.gallery-orbit__item{position:absolute;top:50%;left:50%;width:min(62%,520px);margin:0;transition:filter .3s ease,opacity .3s ease;will-change:transform,opacity}
+.gallery-orbit__item img{width:100%;height:auto;display:block;border-radius:22px;border:1px solid rgba(73,234,255,.28);box-shadow:0 0 38px rgba(73,234,255,.18),0 26px 70px rgba(5,7,17,.75);background:#050711}
+.gallery-feature__caption{display:flex;flex-direction:column;align-items:center;gap:.45rem;text-align:center}
+.gallery-feature__caption span{font-family:var(--font-mono);font-size:.64rem;font-weight:700;letter-spacing:.24em;color:#b9f8ff}
+.gallery-feature__caption strong{font-size:1.25rem;letter-spacing:.04em;color:#fff}
+.gallery-feature__caption p{color:#b9c6e6;font-size:.95rem;margin:0}
+.gallery-video{margin-top:4.5rem}
+.gallery-video__head{display:flex;align-items:center;justify-content:space-between;gap:1.25rem;flex-wrap:wrap;margin-bottom:1.5rem}
+.button--ghost{color:#eaffff;background:rgba(73,234,255,.08);border-color:rgba(73,234,255,.46);cursor:pointer}
+.button--ghost:hover{background:rgba(73,234,255,.18);border-color:rgba(73,234,255,.9)}
+.gallery-video__upload input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.gallery-video__upload{position:relative;overflow:hidden}
+.gallery-video__frame{border-radius:26px;overflow:hidden;border:1px solid rgba(73,234,255,.26);box-shadow:0 0 44px rgba(73,234,255,.16),0 30px 80px rgba(5,7,17,.8);background:#04060f}
+.gallery-video__frame video{width:100%;height:auto;display:block;max-height:70vh;background:#04060f}
+@media (max-width:880px){
+  .gallery-orbit__stage{height:clamp(240px,70vw,380px)}
+  .gallery-orbit__item{width:min(76%,420px)}
+  .gallery-video{margin-top:3rem}
+}
