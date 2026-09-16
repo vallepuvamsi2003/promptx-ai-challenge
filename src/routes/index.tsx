@@ -21,6 +21,9 @@ const GALLERY_IMAGES = [
   { src: galleryPosterUrl, alt: "PROMPTX event poster showing the three challenge rounds" },
 ];
 
+// One seamless half of the marquee; duplicated below for the infinite loop.
+const GALLERY_LOOP = Array.from({ length: 6 }, () => GALLERY_IMAGES).flat();
+
 const DEFAULT_VIDEO = "/media/promptx-event-video.mp4";
 
 export const Route = createFileRoute("/")({
@@ -70,25 +73,7 @@ function Index() {
   const [stuck, setStuck] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState<string | null>(null);
-  const [orbitAngle, setOrbitAngle] = useState(0);
-  const [orbitPaused, setOrbitPaused] = useState(false);
   const [videoSrc, setVideoSrc] = useState(DEFAULT_VIDEO);
-
-  useEffect(() => {
-    if (orbitPaused) return;
-    if (typeof window === "undefined") return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    let raf = 0;
-    let last = performance.now();
-    const tick = (now: number) => {
-      const delta = now - last;
-      last = now;
-      setOrbitAngle((prev) => (prev + delta * 0.012) % 360);
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [orbitPaused]);
 
   const handleVideoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
@@ -1591,44 +1576,27 @@ function Index() {
               className="scroll-reveal gallery-reveal"
               style={{ "--reveal-delay": "120ms" } as React.CSSProperties}
             >
-              <div
-                className="gallery-orbit"
-                onMouseEnter={() => setOrbitPaused(true)}
-                onMouseLeave={() => setOrbitPaused(false)}
-              >
-                <div className="gallery-orbit__stage">
-                  {GALLERY_IMAGES.map((image, index) => {
-                    const step = 360 / GALLERY_IMAGES.length;
-                    const theta = ((orbitAngle + index * step) * Math.PI) / 180;
-                    const x = Math.sin(theta);
-                    const depth = Math.cos(theta);
-                    const scale = 0.62 + 0.38 * ((depth + 1) / 2);
-                    return (
-                      <figure
-                        key={image.src}
-                        className="gallery-orbit__item"
-                        style={{
-                          transform: `translate(-50%, -50%) translate3d(${x * 38}%, ${-depth * 5}%, 0) scale(${scale})`,
-                          opacity: 0.32 + 0.68 * ((depth + 1) / 2),
-                          zIndex: Math.round((depth + 1) * 50),
-                          filter: `blur(${(1 - (depth + 1) / 2) * 1.6}px)`,
-                        }}
-                      >
-                        <img
-                          alt={image.alt}
-                          loading="lazy"
-                          decoding="async"
-                          src={image.src}
-                        />
-                      </figure>
-                    );
-                  })}
+              <div className="gallery-marquee" aria-label="PROMPTX event gallery">
+                <div className="gallery-marquee__track">
+                  {[...GALLERY_LOOP, ...GALLERY_LOOP].map((image, index) => (
+                    <figure
+                      key={`${image.src}-${index}`}
+                      className="gallery-marquee__item"
+                    >
+                      <img
+                        alt={image.alt}
+                        loading="lazy"
+                        decoding="async"
+                        src={image.src}
+                      />
+                    </figure>
+                  ))}
                 </div>
-                <figcaption className="gallery-feature__caption">
-                  <span>EVENT GALLERY</span>
-                  <strong>Think. Prompt. Create. Build.</strong>
-                  <p>One visual signal for the PROMPTX challenge.</p>
-                </figcaption>
+              </div>
+              <div className="gallery-feature__caption">
+                <span>EVENT GALLERY</span>
+                <strong>Think. Prompt. Create. Build.</strong>
+                <p>One visual signal for the PROMPTX challenge.</p>
               </div>
             </div>
             <div
