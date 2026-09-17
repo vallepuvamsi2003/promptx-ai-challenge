@@ -16,7 +16,7 @@ import logoUrl from "@/assets/promptx-logo.jpeg";
 import pxUrl from "@/assets/promptx-px.png";
 import overviewUrl from "@/assets/promptx-event-overview.jpeg";
 import galleryPosterUrl from "@/assets/promptx-gallery-poster.png";
-import narayanaLogoUrl from "@/assets/narayana-logo.png";
+import narayanaLogoUrl from "@/assets/narayana-logo.jpeg";
 
 const GALLERY_IMAGES = [
   { src: galleryPosterUrl, alt: "PROMPTX event poster showing the three challenge rounds" },
