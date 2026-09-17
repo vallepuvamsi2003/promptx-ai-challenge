@@ -24,7 +24,7 @@ const GALLERY_IMAGES = [
 // One seamless half of the marquee; duplicated below for the infinite loop.
 const GALLERY_LOOP = Array.from({ length: 6 }, () => GALLERY_IMAGES).flat();
 
-const DEFAULT_VIDEO = "/media/promptx-event-video.mp4";
+const DEFAULT_VIDEO = "/media/promptx-main-video.mp4";
 
 export const Route = createFileRoute("/")({
   head: () => ({
