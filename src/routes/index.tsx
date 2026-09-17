@@ -16,6 +16,7 @@ import logoUrl from "@/assets/promptx-logo.jpeg";
 import pxUrl from "@/assets/promptx-px.png";
 import overviewUrl from "@/assets/promptx-event-overview.jpeg";
 import galleryPosterUrl from "@/assets/promptx-gallery-poster.png";
+import narayanaLogoUrl from "@/assets/narayana-logo.png";
 
 const GALLERY_IMAGES = [
   { src: galleryPosterUrl, alt: "PROMPTX event poster showing the three challenge rounds" },
@@ -24,7 +25,7 @@ const GALLERY_IMAGES = [
 // One seamless half of the marquee; duplicated below for the infinite loop.
 const GALLERY_LOOP = Array.from({ length: 6 }, () => GALLERY_IMAGES).flat();
 
-const DEFAULT_VIDEO = "/media/promptx-event-video.mp4";
+const DEFAULT_VIDEO = "/media/promptx-main-video.mp4";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -1800,6 +1801,14 @@ function Index() {
                   <span className="brand-word">PROMPTX</span>
                 </a>
                 <p className="site-footer__tagline">Unleash the Power of Prompts</p>
+                <img
+                  alt="Narayana Engineering College, Nellore (Autonomous)"
+                  loading="lazy"
+                  decoding="async"
+                  className="site-footer__college-logo"
+                  style={{ color: "transparent" }}
+                  src={narayanaLogoUrl}
+                />
                 <p className="site-footer__organizer">
                   Organised by CSM Department
                   <br />
