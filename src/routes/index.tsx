@@ -74,13 +74,6 @@ function Index() {
   const [stuck, setStuck] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [active, setActive] = useState<string | null>(null);
-  const [videoSrc, setVideoSrc] = useState(DEFAULT_VIDEO);
-
-  const handleVideoUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    setVideoSrc(URL.createObjectURL(file));
-  };
 
   useEffect(() => {
     const onScroll = () => setStuck(window.scrollY > 120);
@@ -1608,17 +1601,9 @@ function Index() {
                 <p className="eyebrow eyebrow--cyan">
                   <span className="eyebrow__line"></span>PROMPTX VIDEO
                 </p>
-                <label className="button button--ghost gallery-video__upload">
-                  UPLOAD VIDEO
-                  <input
-                    type="file"
-                    accept="video/mp4,video/webm,video/quicktime,video/*"
-                    onChange={handleVideoUpload}
-                  />
-                </label>
               </div>
               <div className="gallery-video__frame">
-                <video key={videoSrc} src={videoSrc} controls playsInline preload="metadata" />
+                <video src={DEFAULT_VIDEO} controls playsInline preload="metadata" />
               </div>
               <div className="gallery-video__frame">
                 <video src="/media/promptx-video-2.mp4" controls playsInline preload="metadata" />
