@@ -63,8 +63,6 @@
 @media (max-width:880px){.site-footer__college-logo{width:min(260px,80%)}}
 
 /* ===== Registration closed announcement bar + closed button (appended) ===== */
-.reg-announcement{position:relative;overflow:hidden;background:linear-gradient(90deg,rgba(73,234,255,.10) 0
-/* ===== Registration closed announcement bar + closed button (appended) ===== */
 .reg-announcement{position:relative;overflow:hidden;background:linear-gradient(90deg,rgba(73,234,255,.10) 0%,rgba(73,234,255,.16) 25%,rgba(180,146,255,.12) 60%,rgba(250,79,202,.10) 100%);border-top:1px solid #49eaff33;border-bottom:1px solid #49eaff33;box-shadow:inset 0 6px 22px -14px #49eaff66}
 .reg-announcement:before,.reg-announcement:after{content:"";position:absolute;top:0;bottom:0;width:12%;z-index:2;pointer-events:none}
 .reg-announcement:before{left:0;background:linear-gradient(90deg,#070a18,transparent)}
