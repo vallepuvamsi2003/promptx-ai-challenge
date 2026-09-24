@@ -64,3 +64,15 @@
 
 /* ===== Registration closed announcement bar + closed button (appended) ===== */
 .reg-announcement{position:relative;overflow:hidden;background:linear-gradient(90deg,rgba(73,234,255,.10) 0
+/* ===== Registration closed announcement bar + closed button (appended) ===== */
+.reg-announcement{position:relative;overflow:hidden;background:linear-gradient(90deg,rgba(73,234,255,.10) 0%,rgba(73,234,255,.16) 25%,rgba(180,146,255,.12) 60%,rgba(250,79,202,.10) 100%);border-top:1px solid #49eaff33;border-bottom:1px solid #49eaff33;box-shadow:inset 0 6px 22px -14px #49eaff66}
+.reg-announcement:before,.reg-announcement:after{content:"";position:absolute;top:0;bottom:0;width:12%;z-index:2;pointer-events:none}
+.reg-announcement:before{left:0;background:linear-gradient(90deg,#070a18,transparent)}
+.reg-announcement:after{right:0;background:linear-gradient(-90deg,#070a18,transparent)}
+.reg-announcement__track{display:flex;width:max-content;white-space:nowrap;will-change:transform;animation:reg-marquee 38s linear infinite}
+.reg-announcement:hover .reg-announcement__track{animation-play-state:paused}
+.reg-announcement__item{display:inline-block;white-space:nowrap;padding:.6rem 2.4rem;color:#eaffff;font-family:var(--font-mono);font-size:.72rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;text-shadow:0 0 14px #49eaff59}
+@keyframes reg-marquee{from{transform:translate3d(-50%,0,0)}to{transform:translate3d(0,0,0)}}
+.button--closed{cursor:not-allowed;pointer-events:none;animation:none;color:#0a0c1c;background:linear-gradient(105deg,#b7c2d2 0%,#8b99af 45%,#66748c 100%);border:1px solid #ff5d7a59;box-shadow:inset 0 0 0 1px #ffffff2b,0 0 20px #ff5d7a2b,0 10px 26px #00000059;text-shadow:none;transform:none!important}
+@media (prefers-reduced-motion:reduce){.reg-announcement__track{animation:none}}
+@media (max-width:880px){.reg-announcement__item{font-size:.6rem;padding:.55rem 1.6rem;letter-spacing:.08em}}
