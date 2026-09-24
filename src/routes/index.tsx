@@ -191,6 +191,20 @@ function Index() {
             REGISTRATION CLOSED
           </button>
         </div>
+        <div className="reg-announcement" role="status">
+          <div className="reg-announcement__track" aria-hidden="false">
+            <span className="reg-announcement__item">{REG_CLOSED_MESSAGE}</span>
+            <span className="reg-announcement__item" aria-hidden="true">
+              {REG_CLOSED_MESSAGE}
+            </span>
+            <span className="reg-announcement__item" aria-hidden="true">
+              {REG_CLOSED_MESSAGE}
+            </span>
+            <span className="reg-announcement__item" aria-hidden="true">
+              {REG_CLOSED_MESSAGE}
+            </span>
+          </div>
+        </div>
         <nav className="mobile-nav" aria-label="Mobile navigation">
           {NAV_ITEMS.map((item) => (
             <a
@@ -235,30 +249,14 @@ function Index() {
               </h1>
               <p className="hero-tagline">Unleash the Power of Prompts</p>
               <div className="hero-actions">
-                <a
-                  className="button button--primary"
-                  href="https://forms.gle/78P3TuzNRuyPi7hh9"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <button
+                  type="button"
+                  className="button button--primary button--closed"
+                  disabled
+                  aria-disabled="true"
                 >
-                  REGISTER NOW{" "}
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="18"
-                    height="18"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-arrow-up-right"
-                    aria-hidden="true"
-                  >
-                    <path d="M7 7h10v10"></path>
-                    <path d="M7 17 17 7"></path>
-                  </svg>
-                </a>
+                  REGISTRATION CLOSED
+                </button>
                 <a className="text-link" href="#rounds">
                   Explore the rounds{" "}
                   <svg
@@ -1728,30 +1726,14 @@ function Index() {
                 <span>REGISTRATION</span>
                 <strong>₹300 / 2 PERSONS · ₹400 / 3 PERSONS</strong>
               </div>
-              <a
-                className="button button--primary button--large"
-                href="https://forms.gle/78P3TuzNRuyPi7hh9"
-                target="_blank"
-                rel="noopener noreferrer"
+              <button
+                type="button"
+                className="button button--primary button--large button--closed"
+                disabled
+                aria-disabled="true"
               >
-                JOIN THE CHALLENGE{" "}
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="19"
-                  height="19"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="lucide lucide-arrow-up-right"
-                  aria-hidden="true"
-                >
-                  <path d="M7 7h10v10"></path>
-                  <path d="M7 17 17 7"></path>
-                </svg>
-              </a>
+                REGISTRATION CLOSED
+              </button>
             </div>
           </div>
         </section>
