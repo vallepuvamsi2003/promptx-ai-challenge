@@ -27,6 +27,9 @@ const GALLERY_LOOP = Array.from({ length: 6 }, () => GALLERY_IMAGES).flat();
 
 const DEFAULT_VIDEO = "/media/promptx-main-video.mp4";
 
+const REG_CLOSED_MESSAGE =
+  "🚀 Registrations for PROMPTX are now closed. Thank you for the overwhelming response! 🎉 Stay tuned for more exciting events! 🔥";
+
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -179,30 +182,14 @@ function Index() {
             <span></span>
             <span></span>
           </button>
-          <a
-            className="button button--small button--primary"
-            href="https://forms.gle/78P3TuzNRuyPi7hh9"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            className="button button--small button--primary button--closed"
+            disabled
+            aria-disabled="true"
           >
-            REGISTER NOW{" "}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="15"
-              height="15"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-arrow-up-right"
-              aria-hidden="true"
-            >
-              <path d="M7 7h10v10"></path>
-              <path d="M7 17 17 7"></path>
-            </svg>
-          </a>
+            REGISTRATION CLOSED
+          </button>
         </div>
         <nav className="mobile-nav" aria-label="Mobile navigation">
           {NAV_ITEMS.map((item) => (
@@ -215,15 +202,15 @@ function Index() {
               {item.label}
             </a>
           ))}
-          <a
-            className="button button--small button--primary"
-            href="https://forms.gle/78P3TuzNRuyPi7hh9"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            type="button"
+            className="button button--small button--primary button--closed"
+            disabled
+            aria-disabled="true"
             onClick={() => setMenuOpen(false)}
           >
-            REGISTER NOW
-          </a>
+            REGISTRATION CLOSED
+          </button>
         </nav>
       </header>
       <main id="top" className="site-page">
