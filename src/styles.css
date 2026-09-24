@@ -61,3 +61,6 @@
 /* Footer college logo */
 .site-footer__college-logo{width:min(300px,70%);height:auto;margin:1.1rem 0 .9rem;filter:drop-shadow(0 0 14px #49eaff26)}
 @media (max-width:880px){.site-footer__college-logo{width:min(260px,80%)}}
+
+/* ===== Registration closed announcement bar + closed button (appended) ===== */
+.reg-announcement{position:relative;overflow:hidden;background:linear-gradient(90deg,rgba(73,234,255,.10) 0
